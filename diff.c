@@ -46,7 +46,7 @@ main()
     //char **words = (char **) malloc( 10 * sizeof(char *) );
 
     // READ THE WORDS FROM INPUT AND LOAD THEM INTO A 2D DYNAMIC ARRAY
-    FILE *input_file = fopen("/home/burak/Documents/CS342/input1.txt", "r");
+    FILE *input_file = fopen("input1.txt", "r");
     int word_amount = 0;
     char **words = read_words_from_file(input_file, &word_amount);
     printf("word amount: %d\n", word_amount);
