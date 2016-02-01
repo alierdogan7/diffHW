@@ -22,6 +22,7 @@ typedef struct {
 int getln( char line[] );
 void println( char line[] );
 void write_to_file( char *str, FILE *file);
+int count_lines_of_file( FILE *file);
 char **read_words_from_file( FILE *file, int *word_amount);
 Node *make_linked_list_from_array( char **words, int length);
 void sort_str_array( char ***words, int length);
@@ -82,7 +83,7 @@ main()
     //    printf("node2: %s", node2->word);
 
     //input_file = fopen("output.txt", "wb");
-    Node *result_node = generate_difflist_of_wordlists(node1, node2);
+    //Node *result_node = generate_difflist_of_wordlists(node1, node2);
     /*for(; result_node != NULL; result_node = result_node->next)
     {
         printf("result_node: %s", result_node->word);
@@ -277,9 +278,12 @@ char **read_words_from_file( FILE *file, int *word_amount)
     if(file != NULL)
     {
         //read the word count
-        char line_no_str[5];
+        /*char line_no_str[5];
         fgets(line_no_str, 5, file);
         int word_count = atoi(line_no_str);
+        */
+
+        int word_count = count_lines_of_file(file);
         *word_amount = word_count; //copy the word amount with pass-by-reference
         //printf("line amount: %d\n", word_count);
 
@@ -301,6 +305,25 @@ char **read_words_from_file( FILE *file, int *word_amount)
     else
     {
         printf("File cannot be found");
+    }
+}
+
+int count_lines_of_file( FILE *file)
+{
+    if(file != NULL)
+    {
+        int c;
+        int lines = 0;
+        while ( (c = getc(file) ) != EOF )
+            if( c == '\n' )
+                lines++;
+
+        return lines;
+    }
+    else
+    {
+        printf("File not found");
+        return 0;
     }
 }
 
