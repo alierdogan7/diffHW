@@ -30,27 +30,19 @@ Node *generate_difflist_of_wordlists( Node *node1, Node *node2);
 void count(Node *head);
 
 
-main()
+main(int argc, char *argv[])
 {
-    //READING INPUT AND WRITING TO FILE
-    /*char my_line[MAX_LENGTH];
+    //READING THE COMMANDLINE ARGUMENTS
+    if (argc != 4) {
+        printf("You need to give the names of 1st input, 2nd input, and output files in order.");
+        return;
+    }
 
-    int length = getln( my_line );
-    printf("length: %d\n", length);
-    printf( my_line);
-    FILE *my_file;
+    //printf("1: %s, 2: %s, o: %s\n", argv[1], argv[2], argv[3]);
 
-    char *path = "/home/burak/Documents/CS342/output.txt";
-    my_file = fopen(path, "a");
-    write_to_file(my_line, my_file);*/
-
-    //char *command = "cat ";
-    //strcat(command, path);
-    //system(command);
-    //char **words = (char **) malloc( 10 * sizeof(char *) );
 
     // READ THE WORDS FROM INPUT AND LOAD THEM INTO A 2D DYNAMIC ARRAY
-    FILE *input_file = fopen("input1.txt", "r");
+    FILE *input_file = fopen(argv[1], "r");
     int word_amount = 0;
     char **words = read_words_from_file(input_file, &word_amount);
     printf("word amount: %d\n", word_amount);
@@ -75,7 +67,7 @@ main()
     printf("-------------------------\n");
 
     //GENERATE THE SECOND LINKED LIST OF WORDS FROM 2ND INPUT
-    input_file = fopen("input2.txt", "r");
+    input_file = fopen(argv[2], "r");
     int word_amount2 = 0;
     char **words2 = read_words_from_file(input_file, &word_amount2);
     printf("2nd word amount: %d\n", word_amount2);
@@ -91,7 +83,7 @@ main()
     printf("-------------------------\n");
 
 
-    input_file = fopen("output.txt", "wb");
+    input_file = fopen(argv[3], "wb");
     Node *result_node = generate_difflist_of_wordlists(node1, node2);
     for(; result_node != NULL; result_node = result_node->next)
     {
@@ -109,6 +101,7 @@ Node *make_linked_list_from_array( char **words, int length)
     Node *head = NULL;
     Node *curr = NULL;
     Node *pre = NULL;
+
 
     int i;
     for( i = 0; i < length; i++)

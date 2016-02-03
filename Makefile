@@ -1,0 +1,22 @@
+# MACROS BELOW, FOR REPLACING MACRO WITH ITS ACTUAL VALUE 
+# SIMPLY ENCLOSE IT WITH $()
+CC = gcc
+FILES = diff.c
+OUTPUT = exec
+HELLO = hello world!
+
+#THE FIRST LINE IS DEPENDENCIES, COMMAND WILL NOT WORK 
+#IF DEPENDENCIES HAS NOT CHANGED SINCE THE LAST BUILD
+build: $(FILES)
+	$(CC) -o $(OUTPUT) $(FILES)
+
+clean:
+	rm -f *.o
+
+rebuild: clean build
+
+say:
+	echo $(HELLO)
+	date
+
+
